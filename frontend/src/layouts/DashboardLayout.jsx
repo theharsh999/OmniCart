@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Package, Tags, Users, Boxes, Receipt, History, LogOut, Store, UserCircle } from 'lucide-react'
+import { LayoutDashboard, Package, Tags, Users, Boxes, Receipt, History, LogOut, Store, UserCircle, BarChart3 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import Chatbot from '../components/Chatbot'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuth()
@@ -9,6 +10,7 @@ export default function DashboardLayout() {
   const links = [
     { to: isAdmin ? '/admin/dashboard' : '/staff/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     ...(isAdmin ? [
+      { to: '/admin/analytics', label: 'Sales Analytics', icon: BarChart3 },
       { to: '/admin/products', label: 'Products', icon: Package },
       { to: '/admin/categories', label: 'Categories', icon: Tags },
       { to: '/admin/cashiers', label: 'Cashier Management', icon: Users },
@@ -52,6 +54,7 @@ export default function DashboardLayout() {
         </div>
       </aside>
       <main className="content"><Outlet /></main>
+      <Chatbot />
     </div>
   )
 }

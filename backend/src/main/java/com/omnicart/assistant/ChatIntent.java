@@ -1,0 +1,35 @@
+package com.omnicart.assistant;
+
+/**
+ * Enumeration of all supported chatbot intents.
+ */
+public enum ChatIntent {
+    GREETING,
+    HELP,
+    TODAY_SALES,
+    TODAY_BILLS,
+    YESTERDAY_SALES,
+    MONTHLY_SALES,
+    SALES_SUMMARY,
+    SHOP_SUMMARY,
+    RECENT_SALES,
+    MY_SALES_TODAY,
+    MY_BILLS_TODAY,
+    MY_RECENT_BILLS,
+    MY_MONTHLY_BILLS,
+    CASHIER_SALES,
+    CASHIER_BILLS,
+    CASHIER_LEADERBOARD,
+    CASHIER_TODAY_BREAKDOWN,
+    TOTAL_PRODUCTS,
+    LOW_STOCK,
+    OUT_OF_STOCK,
+    PRODUCT_STOCK,
+    PRODUCT_PRICE,
+    PRODUCT_SEARCH,
+    CATEGORY_STATS,
+    BILLING_HELP,
+    INVENTORY_HELP,
+    SECURITY_VIOLATION,
+    UNKNOWN
+}

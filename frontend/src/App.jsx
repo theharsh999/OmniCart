@@ -14,6 +14,7 @@ import SalesPage from './pages/SalesPage'
 import InvoicePage from './pages/InvoicePage'
 import ProfilePage from './pages/ProfilePage'
 import CashierManagementPage from './pages/CashierManagementPage'
+import SalesAnalyticsPage from './pages/SalesAnalyticsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
         <Route element={<DashboardLayout />}>
           <Route element={<ProtectedRoute roles={['ADMIN']} />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/analytics" element={<SalesAnalyticsPage />} />
             <Route path="/admin/products" element={<ProductsPage />} />
             <Route path="/admin/categories" element={<CategoriesPage />} />
             <Route path="/admin/cashiers" element={<CashierManagementPage />} />

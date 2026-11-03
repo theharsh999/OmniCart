@@ -35,6 +35,22 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     boolean existsByCategoryId(Long categoryId);
     long countByCategoryId(Long categoryId);
 
+    @EntityGraph(attributePaths = "category")
+    @Query("select p from Product p where p.stockQuantity = 0 order by p.name asc")
+    List<Product> findOutOfStock();
+
+    @Query("select count(p) from Product p where p.stockQuantity = 0")
+    long countOutOfStock();
+
+    @EntityGraph(attributePaths = "category")
+    List<Product> findByNameContainingIgnoreCase(String name);
+
+    @EntityGraph(attributePaths = "category")
+    Optional<Product> findByNameIgnoreCase(String name);
+
+    @Query("select p.category.name, count(p) from Product p group by p.category.name order by count(p) desc")
+    List<Object[]> findCategoryProductCounts();
+
     /**
      * Atomic, conditional stock deduction. Returns 0 when there is not enough stock,
      * so two cashiers can never push stock below zero (prevents overselling).

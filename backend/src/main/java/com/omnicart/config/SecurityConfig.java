@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/products/**", "/api/categories/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/products/**", "/api/categories/**", "/api/sales/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PATCH, "/api/inventory/**").hasRole("ADMIN")
-                .requestMatchers("/api/dashboard/summary", "/api/dashboard/low-stock", "/api/cashiers/**").hasRole("ADMIN")
+                .requestMatchers("/api/dashboard/summary", "/api/dashboard/low-stock", "/api/cashiers/**", "/api/analytics/**").hasRole("ADMIN")
                 .anyRequest().authenticated())
             .exceptionHandling(e -> e
                 .authenticationEntryPoint((req, res, ex) -> writeError(res, 401, "Please log in to continue"))

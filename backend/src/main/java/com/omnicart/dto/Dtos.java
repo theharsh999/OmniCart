@@ -69,4 +69,94 @@ public final class Dtos {
     // ----- dashboard -----
     public record AdminSummary(long totalProducts, long totalCategories, long totalSales, BigDecimal totalRevenue, long lowStockCount) {}
     public record StaffSummary(long todaySalesCount, BigDecimal todayRevenue) {}
+
+    // ----- assistant / chatbot -----
+    public record ChatRequest(String message) {}
+    public record ChatResponse(String answer, String intent, List<String> suggestions) {}
+
+    // ----- analytics -----
+    public record AnalyticsSummary(
+            BigDecimal totalRevenue,
+            long totalOrders,
+            BigDecimal averageOrderValue,
+            long totalItemsSold,
+            BigDecimal todayRevenue,
+            long todayOrders,
+            java.time.LocalDate from,
+            java.time.LocalDate to,
+            Double revenueGrowthPct,
+            Double ordersGrowthPct,
+            BigDecimal prevPeriodRevenue,
+            long prevPeriodOrders
+    ) {
+        public AnalyticsSummary(
+                BigDecimal totalRevenue,
+                long totalOrders,
+                BigDecimal averageOrderValue,
+                long totalItemsSold,
+                BigDecimal todayRevenue,
+                long todayOrders,
+                java.time.LocalDate from,
+                java.time.LocalDate to
+        ) {
+            this(totalRevenue, totalOrders, averageOrderValue, totalItemsSold, todayRevenue, todayOrders, from, to, null, null, null, 0L);
+        }
+    }
+
+    public record DailyRevenuePoint(
+            String date,
+            String dayLabel,
+            BigDecimal revenue,
+            long orderCount,
+            long itemsSold
+    ) {}
+
+    public record PaymentMethodBreakdown(
+            String paymentMethod,
+            long orderCount,
+            BigDecimal totalRevenue,
+            double percentage
+    ) {}
+
+    public record CategorySalesBreakdown(
+            String categoryName,
+            long itemsSold,
+            BigDecimal totalRevenue,
+            double percentage
+    ) {}
+
+    public record TopProductStat(
+            Long productId,
+            String productName,
+            String sku,
+            String categoryName,
+            long quantitySold,
+            BigDecimal totalRevenue
+    ) {}
+
+    public record CashierPerformanceStat(
+            Long cashierId,
+            String cashierName,
+            String employeeId,
+            long billCount,
+            BigDecimal totalRevenue,
+            long itemsSold,
+            BigDecimal averageBillValue
+    ) {}
+
+    public record TopProductsResponse(
+            List<TopProductStat> byQuantity,
+            List<TopProductStat> byRevenue
+    ) {}
+
+    public record AnalyticsDashboardResponse(
+            AnalyticsSummary summary,
+            List<DailyRevenuePoint> revenueTrend,
+            List<PaymentMethodBreakdown> paymentBreakdown,
+            List<CategorySalesBreakdown> categoryBreakdown,
+            List<TopProductStat> topProductsByQuantity,
+            List<TopProductStat> topProductsByRevenue,
+            List<CashierPerformanceStat> cashierPerformance,
+            List<SaleResponse> recentSales
+    ) {}
 }
